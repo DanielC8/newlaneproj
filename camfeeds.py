@@ -19,7 +19,7 @@ def update_overlay_feed(top_left_frame):
 
 
         # Function to update the label within top_left_frame with a new image
-        def update_label():
+        def update_label(leftl,rightl,count):
             ret, frame = cap.read()
 
             if ret:
@@ -28,21 +28,19 @@ def update_overlay_feed(top_left_frame):
                 photo = convert_to_photo_image(frame)
                 camera_feed_label.configure(image=photo)
                 camera_feed_label.image = photo
-                top_left_frame.after(10, update_label)  # Update every 10 milliseconds
+                top_left_frame.after(10, lambda: update_label(leftl,rightl,count))  # Update every 10 milliseconds
             else:
                 print("Error reading frame from camera feed.")
 
         # Create a label within top_left_frame for displaying the camera feed
         camera_feed_label = tk.Label(top_left_frame)
         camera_feed_label.pack()
-        global leftl
-        global rightl
-        global count
+
         leftl = []
         rightl = []
         count = 0
         # Start updating the label
-        update_label()
+        update_label(leftl,rightl,count)
 
     except Exception as e:
         print(f"Error updating camera feed: {e}")
@@ -65,7 +63,7 @@ def update_camera_feed(bottom_left_frame):
             ret, frame = cap.read()
 
             if ret:
-                frame = cv2.resize(frame,(600,350))
+                frame = cv2.resize(frame,(650,380))
                 photo = convert_to_photo_image(frame)
                 camera_feed_label.configure(image=photo)
                 camera_feed_label.image = photo

@@ -122,8 +122,7 @@ def loggedin(username, password, key, name):
     bottom_right_frame = tk.Frame(root, width=300, height=300)
 
     top_left_frame.grid(row=0, column=0, sticky="nsew")
-    camera_feed_label = tk.Label(top_left_frame)
-    camera_feed_label.pack()
+
     bottom_left_frame.grid(row=1, column=0, sticky="nsew")
 
     top_right_frame.grid(row=0, column=1, sticky="nsew")
