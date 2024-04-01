@@ -64,7 +64,7 @@ def process(frame,leftl,rightl,count):
         x1 = int((y1 - points[0][1])/leftline + points[0][0])
         y2 = int(height/2)-50
         x2 = int((y2 - points[0][1])/leftline + points[0][0])
-        leftl = [x1, y1, x2, y2]
+        leftl =[x1, y1, x2, y2]
 
         cv2.line(frame, (x1, height - y1), (x2, height - y2), (0, 255, 0), 10)
     elif leftl != [] and count < 10:
