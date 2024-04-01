@@ -8,7 +8,7 @@ count = 0
 def process(frame,leftl,rightl,count):
     car_cascade = cv2.CascadeClassifier('car2.xml')
     warning = cv2.imread("warning.png")
-
+    forward = cv2.imread("forward.png")
 
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -23,7 +23,7 @@ def process(frame,leftl,rightl,count):
     car = car_cascade.detectMultiScale(gray, 1.3, 2)
     for (x, y, w, h) in car:
         if h*w / (height*width) >= 0.20:
-            frame[0:125,0:125,:] = warning[0:125,0:125,:]
+            frame[125:250,250:375,:] = warning[0:125,0:125,:]
             print("warning")
 
         cv2.rectangle(maskcanny, pt1=(x, y), pt2=(x + w, y + h), color=(0, 0, 0), thickness=-1)
@@ -92,7 +92,7 @@ def process(frame,leftl,rightl,count):
 
     if rightl != [] and leftl != [] and count <10:
         cv2.line(frame, (int((rightl[0]+leftl[0])/2), height - rightl[1]), (int((rightl[2]+leftl[2])/2), height - rightl[3]), (0, 255, 0), 10)
-
+    frame[125:125+93, 600:600+93, :] = forward[0:93, 0:93, :]
     return([frame,leftl,rightl,count])
 
 
